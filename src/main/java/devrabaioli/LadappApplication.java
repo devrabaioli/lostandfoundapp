@@ -10,9 +10,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import devrabaioli.domain.Grade;
 import devrabaioli.domain.Lost;
+import devrabaioli.domain.UserApp;
 import devrabaioli.domain.enums.TypeGrade;
+import devrabaioli.domain.enums.TypeUserApp;
 import devrabaioli.repositories.GradeRepository;
 import devrabaioli.repositories.LostRepository;
+import devrabaioli.repositories.UserAppRepository;
 
 @SpringBootApplication
 public class LadappApplication implements CommandLineRunner {
@@ -22,6 +25,9 @@ public class LadappApplication implements CommandLineRunner {
 	
 	@Autowired
 	private LostRepository lostRepo;
+	
+	@Autowired
+	private UserAppRepository userAppRepo;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(LadappApplication.class, args);
@@ -46,6 +52,14 @@ public class LadappApplication implements CommandLineRunner {
 		
 		gradeRepo.saveAll(Arrays.asList(grad1,grad2));
 		lostRepo.saveAll(Arrays.asList(lost1,lost2));
+		
+		UserApp userapp1 = new UserApp(null, "Hélio Silva", "helio@mail.com", TypeUserApp.EMPLOYEE);
+		UserApp userapp2 = new UserApp(null, "Alexandre Santos","alexandre@mail.com", TypeUserApp.EMPLOYEE);
+		UserApp userapp3 = new UserApp(null, "Fábio Costa","fabio@mail.com", TypeUserApp.EMPLOYEE);
+		UserApp userapp4 = new UserApp(null, "José Carlos", "josecarlos@mail.com",TypeUserApp.EMPLOYEE);
+		UserApp userapp5 = new UserApp(null, "Erika Oliveira", "erika@mail.com",TypeUserApp.EMPLOYEE);
+		
+		userAppRepo.saveAll(Arrays.asList(userapp1,userapp2, userapp3, userapp4, userapp5));
 		
 	}
 
