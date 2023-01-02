@@ -1,17 +1,17 @@
 package devrabaioli.domain;
 
 import java.io.Serializable;
+
+
 import java.util.Date;
 import java.util.Objects;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
+import jakarta.persistence.OneToOne;
+
 
 @Entity
 public class Lost implements Serializable {
@@ -19,27 +19,31 @@ public class Lost implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String descriptrion;
 	private String local;
-	private String whoFind;
 	private Date date;
+	
+	@OneToOne
+	@JoinColumn(name="who_find_id")
+	@MapsId
+	private WhoFind whoFind;
 	
 	@ManyToOne
 	@JoinColumn(name="grade_id")
 	private Grade grade;
 	
+	
 	public Lost() {}
 
-	public Lost(Integer id, String descriptrion, String local, String whoFind, Date date, Grade grade) {
+	public Lost(Integer id, String descriptrion, String local, Date date, Grade grade, WhoFind whoFind) {
 		super();
 		this.id = id;
 		this.descriptrion = descriptrion;
 		this.local = local;
-		this.whoFind = whoFind;
 		this.date = date;
 		this.grade = grade;
+		this.whoFind = whoFind;
 	}
 
 	public Integer getId() {
@@ -66,13 +70,6 @@ public class Lost implements Serializable {
 		this.local = local;
 	}
 
-	public String getWhoFind() {
-		return whoFind;
-	}
-
-	public void setWhoFind(String whoFind) {
-		this.whoFind = whoFind;
-	}
 
 	public Date getDate() {
 		return date;
@@ -89,6 +86,15 @@ public class Lost implements Serializable {
 	public void setGrade(Grade grade) {
 		this.grade = grade;
 	}
+	
+	public WhoFind getWhoFind() {
+		return whoFind;
+	}
+
+	public void setWhoFind(WhoFind whoFind) {
+		this.whoFind = whoFind;
+	}
+	
 
 	@Override
 	public int hashCode() {
@@ -106,7 +112,7 @@ public class Lost implements Serializable {
 		Lost other = (Lost) obj;
 		return Objects.equals(id, other.id);
 	}
-	
+
 	
 
 }
