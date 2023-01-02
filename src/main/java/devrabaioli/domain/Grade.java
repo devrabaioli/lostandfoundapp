@@ -1,13 +1,18 @@
 package devrabaioli.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import devrabaioli.domain.enums.TypeGrade;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 
 @Entity
@@ -19,6 +24,10 @@ public class Grade implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private Integer type;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "grade")
+	private List<Lost> losts = new ArrayList<>();
 	
 	public Grade() {}
 
@@ -43,6 +52,14 @@ public class Grade implements Serializable {
 	public void setType(TypeGrade type) {
 		this.type = type.getCod();
 	}
+	
+	public List<Lost> getLosts() {
+		return losts;
+	}
+
+	public void setLosts(List<Lost> losts) {
+		this.losts = losts;
+	}
 
 	@Override
 	public int hashCode() {
@@ -60,8 +77,7 @@ public class Grade implements Serializable {
 		Grade other = (Grade) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
-	
+
+
 
 }
