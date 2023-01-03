@@ -8,8 +8,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 
 
@@ -30,6 +28,7 @@ public class WhoFind {
 	public WhoFind(Integer id, String name,TypeUserApp type) {
 		super();
 		this.id = id;
+		this.name = name;
 		this.type = type.getCod();
 	}
 

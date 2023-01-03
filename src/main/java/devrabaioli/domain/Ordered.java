@@ -9,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -24,12 +26,17 @@ public class Ordered implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "ordered")
 	private Found found;
 	
+	@ManyToOne
+	@JoinColumn(name="userapp_id")
+	private UserApp userapp;
+	
 	public Ordered() {}
 
-	public Ordered(Integer id, Date instant) {
+	public Ordered(Integer id, Date instant, UserApp userapp) {
 		super();
 		this.id = id;
 		this.instant = instant;
+		this.userapp = userapp;
 	}
 
 	public Integer getId() {
@@ -61,6 +68,13 @@ public class Ordered implements Serializable {
 		this.found = found;
 	}
 	
+	public UserApp getUserapp() {
+		return userapp;
+	}
+
+	public void setUserapp(UserApp userapp) {
+		this.userapp = userapp;
+	}
 
 	@Override
 	public boolean equals(Object obj) {

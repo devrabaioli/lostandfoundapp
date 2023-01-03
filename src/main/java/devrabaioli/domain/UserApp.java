@@ -1,6 +1,8 @@
 package devrabaioli.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import devrabaioli.domain.enums.TypeUserApp;
@@ -8,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 
 @Entity
@@ -21,6 +24,9 @@ public class UserApp implements Serializable {
 	private String name;
 	private String email;
 	private Integer type;
+	
+	@OneToMany(mappedBy = "userapp")
+	private List<Ordered> ordereds = new ArrayList<>();
 	
 	public UserApp() {}
 
@@ -63,6 +69,14 @@ public class UserApp implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public List<Ordered> getOrdereds() {
+		return ordereds;
+	}
+
+	public void setOrdereds(List<Ordered> ordereds) {
+		this.ordereds = ordereds;
+	}
 
 	@Override
 	public int hashCode() {
@@ -81,10 +95,6 @@ public class UserApp implements Serializable {
 		return Objects.equals(id, other.id);
 	}
 
-	
-	
-	
-	
-	
+
 
 }

@@ -16,11 +16,12 @@ public class FoundCNS extends Found{
 	
 	public FoundCNS() {}
 
-	public FoundCNS(Integer id, StateFound state, String name, Date dateClaim) {
-		super(id, state);
+	public FoundCNS(Integer id, StateFound state, Ordered ordered, String name, Date dateClaim) {
+		super(id, state, ordered);
 		this.name = name;
 		this.dateClaim = dateClaim;
 	}
+	
 
 	public Date getDateClaim() {
 		return dateClaim;

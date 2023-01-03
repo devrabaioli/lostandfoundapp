@@ -30,10 +30,11 @@ public abstract class Found implements Serializable {
 	public Found() {}
 	
 	
-	public Found(Integer id, StateFound state) {
+	public Found(Integer id, StateFound state, Ordered ordered) {
 		super();
 		this.id = id;
 		this.state = state.getCod();
+		this.ordered = ordered;
 	}
 
 

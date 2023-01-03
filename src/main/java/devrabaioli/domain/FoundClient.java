@@ -16,8 +16,8 @@ public class FoundClient extends Found {
 	
 	public FoundClient () {}
 
-	public FoundClient(Integer id, StateFound state, String name, String localAddress, Date dateClaim) {
-		super(id, state);
+	public FoundClient(Integer id, StateFound state, Ordered ordered, String name, String localAddress, Date dateClaim) {
+		super(id, state, ordered);
 		this.name = name;
 		this.localAddress = localAddress;
 		this.dateClaim = dateClaim;
