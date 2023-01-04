@@ -1,11 +1,14 @@
 package devrabaioli.resources;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
 
 import devrabaioli.domain.Grade;
 import devrabaioli.services.GradeServices;
@@ -22,5 +25,10 @@ public class GradeResources {
 		Grade obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
-
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
+		service.delete(id);
+		return ResponseEntity.noContent().build();
+	}
 }
