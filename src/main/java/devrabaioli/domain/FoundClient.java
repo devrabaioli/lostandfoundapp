@@ -2,6 +2,8 @@ package devrabaioli.domain;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import devrabaioli.domain.enums.StateFound;
 import jakarta.persistence.Entity;
 
@@ -12,6 +14,8 @@ public class FoundClient extends Found {
 	
 	private String name;
 	private String localAddress;
+	
+	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date dateClaim;
 	
 	public FoundClient () {}

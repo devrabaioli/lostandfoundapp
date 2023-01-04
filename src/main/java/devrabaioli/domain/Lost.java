@@ -1,15 +1,21 @@
 package devrabaioli.domain;
 
 import java.io.Serializable;
-
-
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 
@@ -24,6 +30,7 @@ public class Lost implements Serializable {
 	private String local;
 	private Date date;
 	
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name="who_find_id")
 	@MapsId
@@ -33,6 +40,9 @@ public class Lost implements Serializable {
 	@JoinColumn(name="grade_id")
 	private Grade grade;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "id.lost")
+	private Set<ItemOrdered> itens = new HashSet<>();
 	
 	public Lost() {}
 
@@ -44,6 +54,15 @@ public class Lost implements Serializable {
 		this.date = date;
 		this.grade = grade;
 		this.whoFind = whoFind;
+	}
+	
+	@JsonIgnore
+	public List<Ordered> getOrdereds(){
+		List<Ordered> list = new ArrayList<>();
+		for(ItemOrdered x : itens) {
+			list.add(x.getOrdered());
+		}
+		return list;
 	}
 
 	public Integer getId() {
@@ -95,6 +114,13 @@ public class Lost implements Serializable {
 		this.whoFind = whoFind;
 	}
 	
+	public Set<ItemOrdered> getItens() {
+		return itens;
+	}
+
+	public void setItens(Set<ItemOrdered> itens) {
+		this.itens = itens;
+	}
 
 	@Override
 	public int hashCode() {
@@ -113,6 +139,6 @@ public class Lost implements Serializable {
 		return Objects.equals(id, other.id);
 	}
 
-	
+
 
 }

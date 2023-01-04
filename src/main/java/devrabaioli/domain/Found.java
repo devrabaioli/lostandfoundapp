@@ -3,6 +3,8 @@ package devrabaioli.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import devrabaioli.domain.enums.StateFound;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -22,6 +24,8 @@ public abstract class Found implements Serializable {
 	private Integer id;
 	private Integer state;
 	
+	
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name="ordered_id")
 	@MapsId
@@ -54,6 +58,7 @@ public abstract class Found implements Serializable {
 		this.state = state.getCod();
 	}
 	
+	@JsonIgnore
 	public Ordered getOrdered() {
 		return ordered;
 	}

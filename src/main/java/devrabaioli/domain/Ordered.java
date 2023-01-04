@@ -2,7 +2,11 @@ package devrabaioli.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -11,6 +15,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -21,6 +26,8 @@ public class Ordered implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
+	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date instant;
 	
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "ordered")
@@ -29,6 +36,9 @@ public class Ordered implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="userapp_id")
 	private UserApp userapp;
+	
+	@OneToMany(mappedBy = "id.ordered")
+	private Set<ItemOrdered> itens = new HashSet<>();
 	
 	public Ordered() {}
 
@@ -75,6 +85,14 @@ public class Ordered implements Serializable {
 	public void setUserapp(UserApp userapp) {
 		this.userapp = userapp;
 	}
+	
+	public Set<ItemOrdered> getItens() {
+		return itens;
+	}
+
+	public void setItens(Set<ItemOrdered> itens) {
+		this.itens = itens;
+	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -87,7 +105,6 @@ public class Ordered implements Serializable {
 		Ordered other = (Ordered) obj;
 		return Objects.equals(id, other.id);
 	}
-
 
 
 }

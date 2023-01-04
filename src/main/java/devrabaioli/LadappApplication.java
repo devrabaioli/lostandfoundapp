@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import devrabaioli.domain.Found;
 import devrabaioli.domain.FoundClient;
 import devrabaioli.domain.Grade;
+import devrabaioli.domain.ItemOrdered;
 import devrabaioli.domain.Lost;
 import devrabaioli.domain.Ordered;
 import devrabaioli.domain.UserApp;
@@ -20,6 +21,7 @@ import devrabaioli.domain.enums.TypeGrade;
 import devrabaioli.domain.enums.TypeUserApp;
 import devrabaioli.repositories.FoundRepository;
 import devrabaioli.repositories.GradeRepository;
+import devrabaioli.repositories.ItemOrderedRepository;
 import devrabaioli.repositories.LostRepository;
 import devrabaioli.repositories.OrderedRepository;
 import devrabaioli.repositories.UserAppRepository;
@@ -46,9 +48,13 @@ public class LadappApplication implements CommandLineRunner {
 	@Autowired
 	private FoundRepository foundRepo;
 	
+	@Autowired
+	private ItemOrderedRepository itemOrderedRepo;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(LadappApplication.class, args);
 	}
+	
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -95,6 +101,20 @@ public class LadappApplication implements CommandLineRunner {
 		userAppRepo.saveAll(Arrays.asList(userapp1,userapp2, userapp3, userapp4, userapp5));
 		orderedRepo.saveAll(Arrays.asList(ordered1,ordered2));
 		foundRepo.saveAll(Arrays.asList(found1,found2));
+		
+		ItemOrdered it1 = new ItemOrdered(sdf.parse("04/01/2023 10:23"), ordered1, lost1);
+		ordered1.getItens().addAll(Arrays.asList(it1));
+		lost1.getItens().addAll(Arrays.asList(it1));
+		
+		
+		ItemOrdered it2 = new ItemOrdered(sdf.parse("04/01/2023 11:24"), ordered2, lost2);
+		ordered2.getItens().addAll(Arrays.asList(it2));
+		lost2.getItens().addAll(Arrays.asList(it2));
+		
+		ordered1.getItens().addAll(Arrays.asList(it1));
+		
+		
+		itemOrderedRepo.saveAll(Arrays.asList(it1,it2));
 		
 		
 	}

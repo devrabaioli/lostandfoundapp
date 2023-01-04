@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import devrabaioli.domain.enums.TypeUserApp;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,6 +27,7 @@ public class UserApp implements Serializable {
 	private String email;
 	private Integer type;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "userapp")
 	private List<Ordered> ordereds = new ArrayList<>();
 	

@@ -2,6 +2,8 @@ package devrabaioli.domain;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import devrabaioli.domain.enums.StateFound;
 import jakarta.persistence.Entity;
 
@@ -11,6 +13,8 @@ public class FoundCNS extends Found{
 	private static final long serialVersionUID = 1L;
 	
 	private String name;
+	
+	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date dateClaim;
 	
 	
