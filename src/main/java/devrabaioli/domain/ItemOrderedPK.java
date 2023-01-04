@@ -3,6 +3,8 @@ package devrabaioli.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -12,21 +14,25 @@ public class ItemOrderedPK implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "ordered_id")
 	private Ordered ordered;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name ="lost_id")
 	private Lost lost;
 	
-	
+	@JsonIgnore
 	public Ordered getOrdered() {
 		return ordered;
 	}
 	public void setOrdered(Ordered ordered) {
 		this.ordered = ordered;
 	}
+	
+	@JsonIgnore
 	public Lost getLost() {
 		return lost;
 	}

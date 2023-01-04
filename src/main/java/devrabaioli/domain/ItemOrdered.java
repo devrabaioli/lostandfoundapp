@@ -1,9 +1,11 @@
 package devrabaioli.domain;
 
 import java.io.Serializable;
+
 import java.util.Date;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.EmbeddedId;
@@ -18,6 +20,7 @@ public class ItemOrdered  implements Serializable {
 	@EmbeddedId
 	private ItemOrderedPK id = new ItemOrderedPK();
 	
+	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date date;
 	
 	public ItemOrdered() {}
@@ -29,6 +32,7 @@ public class ItemOrdered  implements Serializable {
 		id.setLost(lost);
 	}
 	
+	@JsonIgnore
 	public Lost getLos() {
 		return id.getLost();
 	}

@@ -2,6 +2,8 @@ package devrabaioli.domain;
 
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import devrabaioli.domain.enums.TypeUserApp;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -20,6 +22,7 @@ public class WhoFind {
 	private String name;
 	private Integer type;
 	
+	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "whoFind")
 	private Lost lost;
 	
@@ -55,6 +58,8 @@ public class WhoFind {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	@JsonIgnore
 	public Lost getLost() {
 		return lost;
 	}

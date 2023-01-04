@@ -1,6 +1,7 @@
 package devrabaioli.domain;
 
 import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -8,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -28,9 +29,11 @@ public class Lost implements Serializable {
 	private Integer id;
 	private String descriptrion;
 	private String local;
+	
+	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date date;
 	
-	@JsonIgnore
+	
 	@OneToOne
 	@JoinColumn(name="who_find_id")
 	@MapsId
@@ -40,7 +43,7 @@ public class Lost implements Serializable {
 	@JoinColumn(name="grade_id")
 	private Grade grade;
 	
-	@JsonIgnore
+	
 	@OneToMany(mappedBy = "id.lost")
 	private Set<ItemOrdered> itens = new HashSet<>();
 	
@@ -56,7 +59,7 @@ public class Lost implements Serializable {
 		this.whoFind = whoFind;
 	}
 	
-	@JsonIgnore
+	
 	public List<Ordered> getOrdereds(){
 		List<Ordered> list = new ArrayList<>();
 		for(ItemOrdered x : itens) {

@@ -1,6 +1,7 @@
 package devrabaioli.domain;
 
 import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -53,6 +54,7 @@ public class Grade implements Serializable {
 		this.type = type.getCod();
 	}
 	
+	@JsonIgnore
 	public List<Lost> getLosts() {
 		return losts;
 	}

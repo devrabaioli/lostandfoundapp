@@ -1,12 +1,14 @@
 package devrabaioli.domain;
 
 import java.io.Serializable;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -30,8 +32,10 @@ public class Ordered implements Serializable {
 	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date instant;
 	
+	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "ordered")
 	private Found found;
+	
 	
 	@ManyToOne
 	@JoinColumn(name="userapp_id")
@@ -70,6 +74,7 @@ public class Ordered implements Serializable {
 		return Objects.hash(id);
 	}
 	
+	@JsonIgnore
 	public Found getFound() {
 		return found;
 	}
@@ -77,6 +82,7 @@ public class Ordered implements Serializable {
 	public void setFound(Found found) {
 		this.found = found;
 	}
+	
 	
 	public UserApp getUserapp() {
 		return userapp;
@@ -86,6 +92,7 @@ public class Ordered implements Serializable {
 		this.userapp = userapp;
 	}
 	
+	@JsonIgnore
 	public Set<ItemOrdered> getItens() {
 		return itens;
 	}

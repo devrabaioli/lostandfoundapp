@@ -1,6 +1,7 @@
 package devrabaioli.domain;
 
 import java.io.Serializable;
+
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -24,7 +25,7 @@ public abstract class Found implements Serializable {
 	private Integer id;
 	private Integer state;
 	
-	
+
 	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name="ordered_id")
