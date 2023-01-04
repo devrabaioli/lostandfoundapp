@@ -22,7 +22,7 @@ public class WhoFind {
 	private String name;
 	private Integer type;
 	
-	@JsonIgnore
+
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "whoFind")
 	private Lost lost;
 	

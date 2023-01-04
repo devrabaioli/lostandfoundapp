@@ -20,7 +20,7 @@ public enum TypeGrade {
 		return this.cod;
 	}
 	
-	public String getDescription() {
+	public String getDescriptionTypeGrade() {
 		return this.description;
 	}
 
@@ -35,4 +35,6 @@ public enum TypeGrade {
 		}
 		throw new IllegalArgumentException("Invalid Id: " + cod);
 	}
+	
+	
 }

@@ -26,6 +26,7 @@ public class Grade implements Serializable {
 	private Integer id;
 	private Integer type;
 	
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "grade")
 	private List<Lost> losts = new ArrayList<>();
@@ -62,6 +63,8 @@ public class Grade implements Serializable {
 	public void setLosts(List<Lost> losts) {
 		this.losts = losts;
 	}
+	
+	
 
 	@Override
 	public int hashCode() {
@@ -79,7 +82,6 @@ public class Grade implements Serializable {
 		Grade other = (Grade) obj;
 		return Objects.equals(id, other.id);
 	}
-
 
 
 }

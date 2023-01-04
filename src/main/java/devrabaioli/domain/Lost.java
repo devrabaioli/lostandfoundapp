@@ -76,7 +76,7 @@ public class Lost implements Serializable {
 		this.id = id;
 	}
 
-	public String getDescriptrion() {
+	public String getDescriptrionLost() {
 		return descriptrion;
 	}
 
@@ -123,6 +123,10 @@ public class Lost implements Serializable {
 
 	public void setItens(Set<ItemOrdered> itens) {
 		this.itens = itens;
+	}
+	
+	public String getDescriptionType() {
+		return getDescriptionType();
 	}
 
 	@Override
